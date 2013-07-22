@@ -8,6 +8,10 @@
 lib = File.expand_path('../../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
+$options = {}
+$options[:env] = "test"
+$options[:config] = File.expand_path("../files/config.yml", __FILE__)
+
 require 'shared_spec'
 
 RSpec.configure do |config|

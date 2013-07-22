@@ -1,0 +1,12 @@
+test:
+  phantom_termination_grace: 10
+  phantom_processes_number: 10
+  phantom_base_port: 8002
+  memory_limit: 150000
+  rails_root: ""
+  nginx_conf: ""
+  phantom_log_path: ""
+  memory_retries: 5
+  memory_check_interval: 5
+  processes_check_retries: 3
+  processes_check_interval: 15
