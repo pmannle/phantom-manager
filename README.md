@@ -1,6 +1,9 @@
 # Phantom::Manager
 
-TODO: Write a gem description
+phantom-manager allows you to use multiple phantom-js processes behind an Nginx
+server. It will manage both presence and memory consumption of those processes
+and kill them when appropriate, all this in sync with the Nginx configuration
+so that all requests will get answered.
 
 ## Installation
 

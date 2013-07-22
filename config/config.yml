@@ -1,12 +1,27 @@
 development:
+  #The time to wait between removing a phantomjs from the nginx configuration
+  #and actually killing the process.
   phantom_termination_grace: 10
-  phantom_processes_number: 10
+
+  #This will be the inital port of the phantomjs processes. For example if
+  #phantom_processes_number is set to 4 and phantom_base_port to 8000 then 4
+  #phantoms, on ports 8000 8001 8002 8003 will be managed.
   phantom_base_port: 8002
-  memory_limit: 150000
+  #Rails root path
   rails_root: "path"
+  #Path to your nginx configuration
   nginx_conf: "path"
+  #Path to where you want to keep your phantomjs logs
   phantom_log_path: "path"
+  #If a phantom process memory consumption is over memory_limit for
+  #memory_retries times with memory_check_interval between each check it will
+  #be killed
+  memory_limit: 150000
   memory_retries: 5
   memory_check_interval: 5
+  #Number of phantom processes to keep up. If a process is missing for
+  #processes_check_retries times in a row with processes_check_interval between
+  #checks it will be brought up byt the monitor
+  phantom_processes_number: 10
   processes_check_retries: 3
   processes_check_interval: 15

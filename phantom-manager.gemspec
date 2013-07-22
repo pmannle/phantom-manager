@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["erez.rabih@gmail.com"]
   spec.description   = %q{Uses Nginx as multiple phantomjs workers load balancer}
   spec.summary       = %q{Write a gem summary}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/FTBpro/phantom-manager"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
