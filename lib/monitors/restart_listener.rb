@@ -14,8 +14,6 @@ module Monitors
         end
       end
 
-      private
-
       def respond_to_signal
         lock do
           $logger.info "Initiating restart sequence"
