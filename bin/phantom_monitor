@@ -38,6 +38,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'phantom/manager/version'
 require 'monitors/memory.rb'
 require 'monitors/processes.rb'
+require 'monitors/restarter.rb'
 
 
 $logger.info "Starting for environment #{$options[:env]} with config file #{$options[:config]}... "

@@ -34,6 +34,26 @@ module Phantom
       end
     end
 
+    describe :required_ports do
+      it "should return all ports from configuration as array" do
+        subject.required_ports.should =~ [8002, 8003, 8004, 8005, 8006]
+      end
+    end
+
+    describe :on_port do
+      before do
+        subject.stub(:running_phantoms_shell_output).and_return(phantoms_ps_shell_output)
+        @data = phantoms_data.first
+      end
+
+      it "should return right process" do
+        p = subject.on_port(@data[:port])
+        @data.each do |attr, val|
+          p.send(attr).should eq val
+        end
+      end
+    end
+
 
   end
 end
