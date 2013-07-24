@@ -21,7 +21,6 @@ module Monitors
         subject.respond_to_signal
       end
 
-
     end
 
   end

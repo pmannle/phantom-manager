@@ -1,6 +1,7 @@
 require 'phantom/manager'
 require 'utils/logger'
 require 'utils/cfg'
+require 'utils/lock'
 
 
 module Monitors
@@ -8,14 +9,13 @@ module Monitors
     class << self
 
       def run
-        @restarting = false
         Signal.trap("USR2") do
           respond_to_signal
         end
       end
 
       def respond_to_signal
-        lock do
+        lock.acquire do
           $logger.info "Initiating restart sequence"
 
           Phantom::Collector.get_running_instances.each do |p|
@@ -25,19 +25,15 @@ module Monitors
             sleep $cfg.phantom_termination_grace
           end
 
-          @restarting = false
         end
       end
 
+      private
+
       def lock
-        if !@restarting
-          @restarting = true
-          yield
-          @restarting = false
-        else
-          $logger.info "Already working"
-        end
+        @lock ||= Utils::Lock.new
       end
+
     end
   end
 end
