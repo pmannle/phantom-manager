@@ -1,3 +1,4 @@
 .rspec
 tags
 log/*
+phantom-manager*.gem
