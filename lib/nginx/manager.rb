@@ -31,12 +31,12 @@ module Nginx
       end
 
       def port_defined?(port)
-        File.readlines($cfg.nginx_conf).grep(/#{port}/).size > 0
+        File.readlines(Cfg.nginx_conf).grep(/#{port}/).size > 0
       end
 
       def switch_nginx_configs
         $logger.info "switching nginx configurations"
-        `mv #{$cfg.new_nginx_conf} #{$cfg.nginx_conf}`
+        `mv #{Cfg.new_nginx_conf} #{Cfg.nginx_conf}`
       end
 
       def reload_nginx
@@ -45,8 +45,8 @@ module Nginx
       end
 
       def modify_nginx
-        File.open($cfg.new_nginx_conf, "w") do |ofile|
-          File.foreach($cfg.nginx_conf) do |iline|
+        File.open(Cfg.new_nginx_conf, "w") do |ofile|
+          File.foreach(Cfg.nginx_conf) do |iline|
             yield ofile, iline
           end
         end

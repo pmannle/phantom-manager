@@ -35,7 +35,7 @@ module Monitors
 
         it "should create two new instances" do
           Phantom::Manager.should_receive(:start).twice
-          $cfg.processes_check_retries.times {subject.perform_check}
+          Cfg.processes_check_retries.times {subject.perform_check}
         end
       end
 

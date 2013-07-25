@@ -24,7 +24,7 @@ module Phantom
       def stop(process)
         $logger.info "stopping process #{process}"
         Nginx::Manager.remove(process.port)
-        sleep $cfg.phantom_termination_grace
+        sleep Cfg.phantom_termination_grace
         process.kill
       end
 

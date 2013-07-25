@@ -18,7 +18,7 @@ module Phantom
       end
 
       def required_ports
-        ($cfg.phantom_base_port..($cfg.phantom_base_port+$cfg.phantom_processes_number-1)).to_a
+        (Cfg.phantom_base_port..(Cfg.phantom_base_port+Cfg.phantom_processes_number-1)).to_a
       end
 
       private

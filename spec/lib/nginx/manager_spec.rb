@@ -36,11 +36,11 @@ module Nginx
     subject {Manager}
 
     def port_defined?(port)
-      File.readlines($cfg.nginx_conf).grep(/#{port}/).size > 0
+      File.readlines(Cfg.nginx_conf).grep(/#{port}/).size > 0
     end
 
     before do
-      File.open($cfg.nginx_conf, "w") do |f|
+      File.open(Cfg.nginx_conf, "w") do |f|
         f.puts(INITIAL_CONF)
       end
 

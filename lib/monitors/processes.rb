@@ -25,7 +25,7 @@ module Monitors
       end
 
       def check_interval
-        $cfg.processes_check_interval
+        Cfg.processes_check_interval
       end
     end
 

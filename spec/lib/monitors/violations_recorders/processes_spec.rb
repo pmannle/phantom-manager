@@ -18,11 +18,11 @@ module Monitors
           Phantom::Collector.stub(:missing_ports).and_return([8004])
           @p = Phantom::Process.new
           @p.port = 8004
-          $cfg.processes_check_retries = 3
+          Cfg.processes_check_retries = 3
         end
 
         context "below retries limit" do
-          let(:retries) {$cfg.processes_check_retries - 1}
+          let(:retries) {Cfg.processes_check_retries - 1}
 
           it "should return false" do
             retries.times do
@@ -34,7 +34,7 @@ module Monitors
 
         context "equals retries limit" do
 
-          let(:retries) {$cfg.processes_check_retries}
+          let(:retries) {Cfg.processes_check_retries}
 
           it "should return false" do
             (retries-1).times do

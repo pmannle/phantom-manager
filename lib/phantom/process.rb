@@ -47,7 +47,7 @@ module Phantom
     private
 
     def start_command
-      "cd #{$cfg.rails_root} && phantomjs rndrme.js #{port} >>#{$cfg.phantom_log_path} 2>&1 &"
+      "cd #{Cfg.rails_root} && phantomjs rndrme.js #{port} >>#{Cfg.phantom_log_path} 2>&1 &"
     end
 
   end

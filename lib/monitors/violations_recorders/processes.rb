@@ -5,7 +5,7 @@ module Monitors
     class Processes < Base
       class << self
         def retries_limit
-          $cfg.processes_check_retries
+          Cfg.processes_check_retries
         end
 
         def process_attr

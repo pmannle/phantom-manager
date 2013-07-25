@@ -1,7 +1,7 @@
 require 'utils/logger'
 require 'utils/cfg'
-$cfg.nginx_conf = File.expand_path('../files/nginx.conf', __FILE__)
-$cfg.new_nginx_conf = File.expand_path('../files/nginx.conf.new', __FILE__)
+Cfg.nginx_conf = File.expand_path('../files/nginx.conf', __FILE__)
+Cfg.new_nginx_conf = File.expand_path('../files/nginx.conf.new', __FILE__)
 
 $logger = Logger.new(nil)
 

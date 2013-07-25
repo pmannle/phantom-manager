@@ -6,7 +6,7 @@ module Monitors
       class << self
 
         def retries_limit
-          $cfg.memory_retries
+          Cfg.memory_retries
         end
 
         def process_attr
@@ -14,7 +14,7 @@ module Monitors
         end
 
         def process_is_violating?(process)
-          process.memory_usage > $cfg.memory_limit
+          process.memory_usage > Cfg.memory_limit
         end
 
       end

@@ -13,8 +13,8 @@ module Monitors
 
       describe :is_violating? do
 
-        let(:violating_memory) { $cfg.memory_limit + 10}
-        let(:valid_memory) { $cfg.memory_limit - 10}
+        let(:violating_memory) { Cfg.memory_limit + 10}
+        let(:valid_memory) { Cfg.memory_limit - 10}
 
         context "violating process" do
 
@@ -24,7 +24,7 @@ module Monitors
           end
 
           it "should return true" do
-            ($cfg.memory_retries-1).times do
+            (Cfg.memory_retries-1).times do
               subject.is_violating?(@p).should be_false
             end
 
@@ -40,7 +40,7 @@ module Monitors
           end
 
           it "should return false" do
-            $cfg.memory_retries.times do
+            Cfg.memory_retries.times do
               subject.is_violating?(@p).should be_false
             end
           end
@@ -49,7 +49,7 @@ module Monitors
 
             it "reset violations if valid memory detected one" do
               @p.memory_usage = violating_memory
-              ($cfg.memory_retries-1).times do
+              (Cfg.memory_retries-1).times do
                 subject.is_violating?(@p).should be_false
               end
 
@@ -58,7 +58,7 @@ module Monitors
               subject.is_violating?(@p).should be_false
 
               @p.memory_usage = violating_memory
-              ($cfg.memory_retries-1).times do
+              (Cfg.memory_retries-1).times do
                 subject.is_violating?(@p).should be_false
               end
               subject.is_violating?(@p).should be_true

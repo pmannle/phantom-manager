@@ -22,7 +22,7 @@ module Monitors
             $logger.info "Restarting process on port #{p.port}"
             Phantom::Manager.restart(p)
 
-            sleep $cfg.phantom_termination_grace
+            sleep Cfg.phantom_termination_grace
           end
 
         end

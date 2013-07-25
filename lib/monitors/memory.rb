@@ -19,7 +19,7 @@ module Monitors
       end
 
       def check_interval
-        $cfg.memory_check_interval
+        Cfg.memory_check_interval
       end
     end
 

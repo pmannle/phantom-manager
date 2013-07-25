@@ -6,8 +6,8 @@ module Phantom
     subject {Collector}
 
     before do
-      $cfg.phantom_processes_number = 5
-      $cfg.phantom_base_port = 8002
+      Cfg.phantom_processes_number = 5
+      Cfg.phantom_base_port = 8002
       subject.stub(:running_phantoms_shell_output).and_return(phantoms_ps_shell_output)
     end
 
