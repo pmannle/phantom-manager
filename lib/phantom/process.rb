@@ -44,7 +44,15 @@ module Phantom
       Utils::Shell.execute start_command
     end
 
+    def to_s
+      inspect
+    end
+
     private
+
+    def inspect
+      "pid: #{pid}, port: #{port}, memory_usage: #{memory_usage}, command: #{command}"
+    end
 
     def start_command
       "cd #{Cfg.rails_root} && phantomjs rndrme.js #{port} >>#{Cfg.phantom_log_path} 2>&1 &"

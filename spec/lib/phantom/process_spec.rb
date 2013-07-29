@@ -43,5 +43,12 @@ module Phantom
         p.start
       end
     end
+
+    describe :inspect do
+      it "should present all data in string" do
+        p = generate_process
+        "#{p}".should eq "pid: #{p.pid}, port: #{p.port}, memory_usage: #{p.memory_usage}, command: #{p.command}"
+      end
+    end
   end
 end
