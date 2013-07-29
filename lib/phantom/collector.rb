@@ -35,7 +35,7 @@ module Phantom
       end
 
       def running_phantoms_shell_command
-        "ps -e -www -o pid,rss,command | grep 'phantomjs' | grep -v sh | grep -v grep"
+        "ps -e -www -o pid,rss,command | grep 'phantomjs rndrme.js' | grep -v sh | grep -v grep"
       end
 
       def log_error(processes, lines)
