@@ -25,5 +25,6 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = 'random'
 
+  require 'utils/shell'
   config.before(:each)  { Utils::Shell.stub(:system) }
 end

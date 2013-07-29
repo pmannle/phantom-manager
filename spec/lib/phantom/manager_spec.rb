@@ -8,18 +8,18 @@ module Phantom
 
     describe :start do
 
-      let(:p) {generate_process}
+      let(:p) { generate_process }
+      let(:processes) {[generate_process, generate_process, generate_process ]}
 
       it "should start new phantom process" do
-        p.should_receive :start
-        subject.start(p)
+        processes.each {|p| p.should_receive :start}
+        subject.start(processes)
       end
 
       it "should add port to nginx conf" do
-        Nginx::Manager.should_receive(:add).with(p.port).once
-        subject.start(p)
+        Nginx::Manager.should_receive(:add).with(processes.map(&:port)).once
+        subject.start(processes)
       end
     end
-
   end
 end

@@ -33,6 +33,10 @@ CONF
 
 module Nginx
   describe Manager do
+    let :ports do
+      (8002..8011).to_a
+    end
+
     subject {Manager}
 
     def port_defined?(port)
@@ -57,6 +61,16 @@ module Nginx
           }.to change{port_defined?(8003)}.from(true).to(false)
         end
       end
+
+      context "multiple ports" do
+        it "should be removed" do
+          ports_to_remove = [8002, 8003, 8006]
+          ports.each {|p| port_defined?(p).should be_true}
+          subject.remove(ports_to_remove)
+          ports_to_remove.each {|p| port_defined?(p).should be_false}
+          (ports-ports_to_remove).each {|p| port_defined?(p).should be_true}
+        end
+      end
     end
 
     describe :add do
@@ -73,6 +87,15 @@ module Nginx
           expect {
             subject.add(8003)
           }.not_to change{port_defined?(8003)}
+        end
+      end
+
+      context "multiple ports" do
+        it "should add them all" do
+          ports_to_add = [8012, 8013]
+          ports.each {|p| port_defined?(p).should be_true}
+          subject.add(ports_to_add)
+          ports_to_add.each {|p| port_defined?(p).should be_true}
         end
       end
     end

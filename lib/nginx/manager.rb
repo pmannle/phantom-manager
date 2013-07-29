@@ -1,26 +1,29 @@
 require 'utils/logger'
 require 'utils/cfg'
+require 'utils/shell'
 
 module Nginx
   class Manager
     class << self
 
-      def remove(port)
-        $logger.info "removing #{port} from nginx"
+      def remove(ports)
+        ports = [*ports]
+        $logger.info "removing #{ports} from nginx"
         modify_nginx do |ofile, iline|
-          ofile.puts(iline) unless iline =~ /#{port}/
+          ofile.puts(iline) if !line_matches_ports(iline, ports)
         end
       end
 
-      def add(port)
-        $logger.info "adding #{port} to nginx"
-        if !port_defined?(port)
-          modify_nginx do |ofile, iline|
-            ofile.puts(iline)
-            ofile.puts(phantom_upstream(port)) if iline =~ /upstream phantomjs/
+      def add(ports)
+        ports = [*ports]
+        $logger.info "adding #{ports} to nginx"
+        modify_nginx do |ofile, iline|
+          ofile.puts(iline)
+          if iline =~ /upstream phantomjs/
+            ports.each do |port|
+              ofile.puts(phantom_upstream(port)) unless port_defined?(port)
+            end
           end
-        else
-          $logger.info "port #{port} already defined"
         end
       end
 
@@ -41,7 +44,7 @@ module Nginx
 
       def reload_nginx
         $logger.info "reloading nginx"
-        `nginx -s reload`
+        Utils::Shell.execute "nginx -s reload"
       end
 
       def modify_nginx
@@ -52,6 +55,14 @@ module Nginx
         end
         switch_nginx_configs
         reload_nginx
+      end
+
+      def line_matches_ports(line, ports)
+        line =~ ports_regexp(ports)
+      end
+
+      def ports_regexp(ports)
+        /#{ports.join("|")}/
       end
 
     end

@@ -7,25 +7,28 @@ module Phantom
   module Manager
     class << self
 
-      def restart(process)
-        $logger.info "restarting process #{process}"
-        stop process
-        start process
+      def restart(processes)
+        processes = [*processes]
+        $logger.info "restarting process #{processes}"
+        stop processes
+        start processes
       end
 
-      def start(process)
-        $logger.info "starting process #{process.port}"
-        process.start
-        Nginx::Manager.add(process.port)
+      def start(processes)
+        processes = [*processes]
+        $logger.info "starting process #{processes}"
+        processes.each(&:start)
+        Nginx::Manager.add(processes.map(&:port))
       end
 
       private 
 
-      def stop(process)
-        $logger.info "stopping process #{process}"
-        Nginx::Manager.remove(process.port)
+      def stop(processes)
+        processes = [*processes]
+        $logger.info "stopping process #{processes}"
+        Nginx::Manager.remove(processes.map(&:port))
         sleep Cfg.phantom_termination_grace
-        process.kill
+        processes.each(&:kill)
       end
 
     end
