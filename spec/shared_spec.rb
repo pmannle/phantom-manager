@@ -40,6 +40,6 @@ def data_to_ps(p)
  "#{p[:pid]} #{p[:memory_usage]} #{p[:command]}"
 end
 
-def phantoms_ps_shell_output
-  phantoms_data.map {|p| data_to_ps(p) }.join("\n")
+def phantoms_ps_shell_output(data = phantoms_data)
+  data.map {|p| data_to_ps(p) }.join("\n")
 end

@@ -54,6 +54,29 @@ module Phantom
       end
     end
 
+    describe "bad processes" do
+      before do
+        phantoms = [ 
+          {pid: 5555, memory_usage: 1000, command: "phantomjs rndrme.js 8020"},
+          {pid: 6666, memory_usage: 1000, command: "phantomjs rndrme.js 8003"}
+          ]
+        ps = phantoms_ps_shell_output(phantoms)
+        subject.stub(:running_phantoms_shell_output).and_return(ps)
+      end
+
+      it "should not return bad phantom processes" do
+        generated_phantoms = subject.get_running_instances
+        generated_phantoms.size.should eq 1
+        generated_phantoms.first.port.should eq 8003
+      end
+
+      it "should log error with bad phantoms" do
+        subject.should_receive(:log_error).once
+        subject.get_running_instances
+      end
+
+    end
+
 
   end
 end

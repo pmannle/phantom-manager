@@ -10,7 +10,7 @@ module Phantom
 
       def get_running_instances
         lines = running_phantoms_shell_output.split("\n")
-        lines.map {|l| Phantom::Process.from_string(l) }
+        parse_processes lines
       end
 
       def missing_ports
@@ -23,12 +23,25 @@ module Phantom
 
       private
 
+      def parse_processes(lines)
+        processes = lines.map {|l| Phantom::Process.from_string(l) }
+        bad_processes = processes.select {|p| !required_ports.include?(p.port)}
+        log_error(bad_processes, lines) if bad_processes.any?
+        processes.select {|p| required_ports.include?(p.port)}
+      end
+
       def running_phantoms_shell_output
         `#{running_phantoms_shell_command}`
       end
 
       def running_phantoms_shell_command
         "ps -e -www -o pid,rss,command | grep 'phantomjs' | grep -v sh | grep -v grep"
+      end
+
+      def log_error(processes, lines)
+        $logger.error "Collector got bad process!"
+        $logger.error "Processes were #{processes}"
+        $logger.error "lines were: #{lines}"
       end
 
     end
