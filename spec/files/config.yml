@@ -10,3 +10,4 @@ test:
   memory_check_interval: 5
   processes_check_retries: 3
   processes_check_interval: 15
+  phantom_command: 'phantomjs config/phantomjs/rndrme.js'

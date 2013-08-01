@@ -25,3 +25,6 @@ development:
   phantom_processes_number: 10
   processes_check_retries: 3
   processes_check_interval: 15
+
+  #Command to issue when launching phantomjs
+  phantom_command: 'phantomjs rndrme.js'

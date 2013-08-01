@@ -57,8 +57,8 @@ module Phantom
     describe "bad processes" do
       before do
         phantoms = [ 
-          {pid: 5555, memory_usage: 1000, command: "phantomjs rndrme.js 8020"},
-          {pid: 6666, memory_usage: 1000, command: "phantomjs rndrme.js 8003"}
+          {pid: 5555, memory_usage: 1000, command: "#{Cfg.phantom_command} 8020"},
+          {pid: 6666, memory_usage: 1000, command: "#{Cfg.phantom_command} 8003"}
           ]
         ps = phantoms_ps_shell_output(phantoms)
         subject.stub(:running_phantoms_shell_output).and_return(ps)

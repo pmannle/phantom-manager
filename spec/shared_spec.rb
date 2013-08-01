@@ -10,7 +10,7 @@ def generate_memory
 end
 
 def generate_process
-  Phantom::Process.new(rand(1000), generate_memory, "phantomjs rndrme.js #{rand(2000)}", 8000 + rand(10))
+  Phantom::Process.new(rand(1000), generate_memory, "#{Cfg.phantom_command} #{rand(2000)}", 8000 + rand(10))
 end
 
 def phantoms_data
@@ -18,19 +18,19 @@ def phantoms_data
     {
       pid: 1000,
       memory_usage: 100000,
-      command: "phantomjs rndrme.js 8002",
+      command: "#{Cfg.phantom_command} 8002",
       port: 8002
     },
     {
       pid: 2000,
       memory_usage: 130000,
-      command: "phantomjs rndrme.js 8003",
+      command: "#{Cfg.phantom_command} 8003",
       port: 8003
     },
     {
       pid: 3000,
       memory_usage: 80000,
-      command: "phantomjs rndrme.js 8006",
+      command: "#{Cfg.phantom_command} 8006",
       port: 8006
     }
   ]

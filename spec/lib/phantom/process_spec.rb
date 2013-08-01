@@ -14,10 +14,10 @@ module Phantom
       end
 
       it "should initialize with string" do
-        p = Phantom::Process.from_string("1 2 phantomjs rndrme.js 4")
+        p = Phantom::Process.from_string("1 2 #{Cfg.phantom_command} 4")
         p.pid.should eq 1
         p.memory_usage.should eq 2
-        p.command.should eq "phantomjs rndrme.js 4"
+        p.command.should eq "#{Cfg.phantom_command} 4"
         p.port.should eq 4
       end
 
