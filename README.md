@@ -21,7 +21,78 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+1. You will need Nginx which will load balance requests between the phantom-js
+processes.
+Its conf must include an "upstream phantomjs" directive with the corresponding
+settings. For example:
+
+```
+upstream phantomjs {
+  server 127.0.0.1:8002;
+  server 127.0.0.1:8003;
+  server 127.0.0.1:8004;
+  server 127.0.0.1:8005;
+}
+```
+
+2. A customized rndrme.js file that will fit your configuration. There is an
+   example rndrme.js file under lib/utils.
+   The host configuration is where phantom-js requests the page from, so be
+   sure to point it to your backend server.
+   Also, set the readyEvent to be the event you'r raising so that phantom-js
+   identify it should start rendering.
+
+3. Create a config.yml file to set the variables for phantom-manager. There's
+   an example config file under /config in this repo with a documentation of
+   each attribute and its meaning.
+
+4. You're ready to run phantom-manager:
+   Just run `phantom_monitor` from anywhere in your system to get the usage
+   instructions for the command line tool.
+   Usually, you would just `phantom_monitor -c YOUR_CONF_FILE -e YOUR_ENV`
+   The env option is there to allow your config.yml to have multiple
+   environments settings.
+
+
+## How Does It Work?
+
+Phantom manager will check for both presence and memory consumption of your
+phantom-js processes under the configuration you have defined.
+
+### Presence
+
+Assuming configuration:
+
+```
+phantom_base_port: 8002
+phantom_processes_number: 3
+```
+The monitor will keep phantom-js processes up on ports 8002, 8003, 8004
+If a phantom-js crashes the monitor will bring it back up.
+
+### Memory Consumption
+
+Assuming configuration:
+```
+memory_limit: 100_000
+memory_retries: 3
+memory_check_interval: 5
+```
+The monitor sample all phantom-js processes each 5 seconds and restart those
+which their memory exceeded 100MB for 3 straight samples.
+
+### Restarting Processes
+
+To restart a phantom-js process the monitor performs the following actions:
+1. Remove the process from nginx upstream config.
+2. Reload Nginx.
+3. Sleeps for phantom_termination_grace seconds to allow this phantom to
+   respond to all requests in its request queue.
+4. Kill the phantom-js process.
+5. Start the phantom-js process on the same port.
+6. Add it to the Nginx upstream configuration.
+7. Reload Nginx.
+
 
 ## Contributing
 
