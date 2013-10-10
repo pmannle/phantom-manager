@@ -46,18 +46,19 @@ upstream phantomjs {
 
 2. A customized [rndr.me js](https://github.com/jed/rndr.me) file that will fit your configuration. There is an
    example rndrme.js [here](lib/utils/rndrme.js).
+
    The host configuration is where phantom-js requests the page from, so be
    sure to point it to your backend server.
    Also, set the readyEvent to be the event you'r raising so that phantom-js
    identify it should start rendering.
 
 3. Create a config.yml file to set the variables for phantom-manager. There's
-   an example config file under /config in this repo with a documentation of
-   each attribute and its meaning.
+   an [example config](config/config.yml) with a documentation of each attribute and its meaning.
 
 4. You're ready to run phantom-manager:
    Just run `phantom_monitor` from anywhere in your system to get the usage
    instructions for the command line tool.
+
    Usually, you would just `phantom_monitor -c YOUR_CONF_FILE -e YOUR_ENV`
    The env option is there to allow your config.yml to have multiple
    environments settings.
