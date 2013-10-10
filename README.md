@@ -100,13 +100,20 @@ which their memory exceeded 100MB for 3 straight samples.
 ### Restarting Processes
 
 To restart a phantom-js process the monitor performs the following actions:
+
 1. Remove the process from nginx upstream config.
+
 2. Reload Nginx.
+
 3. Sleeps for phantom_termination_grace seconds to allow this phantom to
    respond to all requests in its request queue.
+
 4. Kill the phantom-js process.
+
 5. Start the phantom-js process on the same port.
+
 6. Add it to the Nginx upstream configuration.
+
 7. Reload Nginx.
 
 
