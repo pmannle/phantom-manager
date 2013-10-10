@@ -12,7 +12,9 @@ so that all requests will get answered.
 If you've got a singlepage application and you want to:
 * Render full page for GoogleBot or other web crawlers.
 * Render full page to be cached by your CDN.
+
 While:
+
 * Keeping your phantom-js processes running.
 * Preventing your phantom-js processes from memory-bloat.
 
