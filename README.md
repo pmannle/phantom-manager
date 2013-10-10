@@ -45,7 +45,7 @@ upstream phantomjs {
 ```
 
 2. A customized [rndr.me js](https://github.com/jed/rndr.me) file that will fit your configuration. There is an
-   example rndrme.js file under lib/utils.
+   example rndrme.js [here](blob/master/lib/utils/rndrme.js).
    The host configuration is where phantom-js requests the page from, so be
    sure to point it to your backend server.
    Also, set the readyEvent to be the event you'r raising so that phantom-js
