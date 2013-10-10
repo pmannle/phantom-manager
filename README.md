@@ -69,6 +69,8 @@ upstream phantomjs {
    The env option is there to allow your config.yml to have multiple
    environments settings.
 
+5. The phantom_monitor process listens for USR2 signals. Once such a signal is
+   sent it will restart all processes one by one.
 
 ## How Does It Work?
 
