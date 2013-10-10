@@ -5,6 +5,15 @@ server. It will manage both presence and memory consumption of those processes
 and kill them when appropriate, all this in sync with the Nginx configuration
 so that all requests will get answered.
 
+If you've got a singlepage application and you want to:
+* Render full page for GoogleBot or other web crawlers.
+* Render full page to be cached by your CDN.
+While:
+* Keeping your phantom-js processes running.
+* Preventing your phantom-js processes from memory-bloat.
+
+This is a good way to achieve it.
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -23,7 +32,7 @@ Or install it yourself as:
 
 1. You will need Nginx which will load balance requests between the phantom-js
 processes.
-Its conf must include an "upstream phantomjs" directive with the corresponding
+Its conf must include a "upstream phantomjs" directive with the corresponding
 settings. For example:
 
 ```
@@ -35,7 +44,7 @@ upstream phantomjs {
 }
 ```
 
-2. A customized rndrme.js file that will fit your configuration. There is an
+2. A customized [rndr.me js](https://github.com/jed/rndr.me) file that will fit your configuration. There is an
    example rndrme.js file under lib/utils.
    The host configuration is where phantom-js requests the page from, so be
    sure to point it to your backend server.
