@@ -2,7 +2,7 @@
 
 The architecture behind phantom-manager is:
 
-![Phantom-Architecture](http://i40.tinypic.com/1zdt3jq.jpg)
+![Phantom-Architecture](http://i39.tinypic.com/2gxnz3d.png)
 
 phantom-manager allows you to use multiple phantom-js processes behind an Nginx
 server. It will manage both presence and memory consumption of those processes
