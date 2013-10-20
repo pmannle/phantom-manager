@@ -6,7 +6,7 @@ module Monitors
 
     class << self
       def perform_check
-        logger.info "Perfoming processes check..."
+        log "Perfoming processes check..."
 
         missing_processes = Phantom::Collector.missing_ports.map do |port|
           p = Phantom::Process.new
@@ -21,7 +21,7 @@ module Monitors
           end
         end
 
-        logger.info "All processes are running OK" if missing_processes.empty?
+        log "All processes are running OK" if missing_processes.empty?
       end
 
       def check_interval

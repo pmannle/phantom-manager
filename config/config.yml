@@ -28,3 +28,11 @@ development:
 
   #Command to issue when launching phantomjs
   phantom_command: 'phantomjs rndrme.js'
+
+
+  #Response Time Monitor
+  #
+  # If a phantomjs process excceeds this time in response it will be killed
+  response_time_threshold: 2
+  response_time_check_retries: 2
+  response_time_check_interval: 40

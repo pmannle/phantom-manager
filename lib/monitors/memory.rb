@@ -7,11 +7,11 @@ module Monitors
     class << self
 
       def perform_check
-        logger.info "Perfoming memory check..."
+        log "Perfoming memory check..."
 
         running_instances.each do |p|
           if ViolationsRecorders::Memory.is_violating?(p)
-            logger.info "process #{p.pid} was found bad!"
+            logger.info "process #{p.pid} had a memory violation"
             Phantom::Manager.restart(p)
           end
         end

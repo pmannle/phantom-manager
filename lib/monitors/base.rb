@@ -33,6 +33,10 @@ module Monitors
       def logger
         @logger ||= $logger
       end
+
+      def log(str)
+        logger.info "[#{self.name}] #{str}"
+      end
     end
 
   end
