@@ -42,9 +42,10 @@ lib = File.expand_path('../../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 require 'phantom/manager/version'
-require 'monitors/memory.rb'
-require 'monitors/processes.rb'
-require 'monitors/restart_listener.rb'
+require 'monitors/memory'
+require 'monitors/processes'
+require 'monitors/response_time'
+require 'monitors/restart_listener'
 
 
 $logger.info "Starting for environment #{$options[:env]} with config file #{$options[:config]}... "
@@ -59,3 +60,6 @@ $logger.info "Running processes monitor for phantom processes"
 
 Thread.new {Monitors::Processes.run}.join
 
+$logger.info "Running processes monitor for response time"
+
+Thread.new {Monitors::ResponseTime.run}.join
