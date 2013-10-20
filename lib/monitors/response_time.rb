@@ -12,7 +12,7 @@ module Monitors
         running_instances.each do |p|
           if ViolationsRecorders::ResponseTime.is_violating?(p)
             all_processes_ok = false
-            logger.info "process #{p} had a response time violation"
+            log "process #{p} had a response time violation"
             Phantom::Manager.restart(p)
           end
         end
