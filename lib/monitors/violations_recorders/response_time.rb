@@ -1,4 +1,5 @@
 require 'monitors/violations_recorders/base'
+require 'timeout'
 
 module Monitors
   module ViolationsRecorders
@@ -27,7 +28,8 @@ module Monitors
         private
 
         def check_response_time(process)
-          `curl -o /dev/null -s -w %{time_total} #{process_url(process)}`.to_f
+          res = `curl -o /dev/null -s -w %{time_total}@%{http_code} #{process_url(process)}`
+          res.split("@").first.to_f
         end
 
         def process_url(process)

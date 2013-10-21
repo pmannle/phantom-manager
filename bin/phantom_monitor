@@ -58,7 +58,7 @@ Thread.new {Monitors::Memory.run}
 
 $logger.info "Running processes monitor for phantom processes"
 
-Thread.new {Monitors::Processes.run}.join
+Thread.new {Monitors::Processes.run}
 
 $logger.info "Running processes monitor for response time"
 

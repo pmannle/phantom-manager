@@ -6,8 +6,6 @@ module Monitors
 
     class << self
       def perform_check
-        log "Perfoming processes check..."
-
         missing_processes = Phantom::Collector.missing_ports.map do |port|
           p = Phantom::Process.new
           p.port = port
@@ -16,7 +14,7 @@ module Monitors
 
         missing_processes.each do |p|
           if ViolationsRecorders::Processes.is_violating?(p)
-            logger.info "found missing phantom on port #{p.port}"
+            log "found missing phantom on port #{p.port}"
             Phantom::Manager.start(p)
           end
         end

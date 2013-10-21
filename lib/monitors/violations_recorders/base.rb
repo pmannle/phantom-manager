@@ -5,6 +5,7 @@ require 'phantom/process'
 module Monitors
   module ViolationsRecorders
     class Base
+      extend Logging
 
       class << self
 
@@ -19,9 +20,9 @@ module Monitors
         end
 
         def is_violating?(process)
-          $logger.debug "checking #{process}"
+          log "checking #{process}", :debug
           update_violations_count(process)
-          $logger.debug "#{@violations}"
+          log "#{@violations}", :debug
           violating = @violations[process.send(process_attr)] == retries_limit
           @violations[process.send(process_attr)] = 0 if violating
           violating

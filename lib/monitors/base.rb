@@ -5,12 +5,14 @@ require 'phantom/collector'
 
 module Monitors
   class Base
+    extend Logging
 
     class << self
       def run(custom_logger = $logger)
         @logger = custom_logger
 
         loop do
+          log "Performing Check..."
           perform_check
           sleep check_interval
         end
@@ -30,13 +32,6 @@ module Monitors
         Phantom::Collector.get_running_instances
       end
 
-      def logger
-        @logger ||= $logger
-      end
-
-      def log(str)
-        logger.info "[#{self.name}] #{str}"
-      end
     end
 
   end

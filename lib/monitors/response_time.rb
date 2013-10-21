@@ -6,8 +6,6 @@ module Monitors
 
     class << self
       def perform_check
-        log "Perfoming response time check..."
-
         all_processes_ok = true
         running_instances.each do |p|
           if ViolationsRecorders::ResponseTime.is_violating?(p)
