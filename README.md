@@ -17,6 +17,7 @@ While:
 
 * Keeping your phantom-js processes running.
 * Preventing your phantom-js processes from memory-bloat.
+* Making sure all phantom-js processes are responsive.
 
 This is a good way to achieve it.
 
@@ -98,6 +99,21 @@ memory_check_interval: 5
 ```
 The monitor sample all phantom-js processes each 5 seconds and restart those
 which their memory exceeded 100MB for 3 straight samples.
+
+### Response Time
+
+Assuming Configuration:
+
+```
+response_time_threshold: 2
+response_time_check_retries: 2
+response_time_check_interval: 40
+```
+
+The monitor will send an HTTP request to root path (/) of each phantom-js process.
+If a response is not received within 2 seconds for 2 consecutive samples the
+process will be restarted.
+
 
 ### Restarting Processes
 
