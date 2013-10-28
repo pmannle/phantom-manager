@@ -75,7 +75,7 @@ upstream phantomjs {
 
 ## How Does It Work?
 
-Phantom manager will check for both presence and memory consumption of your
+Phantom manager will check for presence, memory consumption and responsiveness of your
 phantom-js processes under the configuration you have defined.
 
 ### Presence
