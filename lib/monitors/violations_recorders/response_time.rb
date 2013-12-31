@@ -28,12 +28,12 @@ module Monitors
         private
 
         def check_response_time(process)
-          res = `curl -o /dev/null -s -w %{time_total}@%{http_code} #{process_url(process)}`
+          res = `curl -o /dev/null -s -w %{time_total}@%{http_code} --header "X-Backend-Host: #{Cfg.response_time_check_host}" --header "X-Phantom: true" #{process_url(process)}`
           res.split("@").first.to_f
         end
 
         def process_url(process)
-          "http://localhost:#{process.port}"
+          "http://localhost:#{process.port}#{Cfg.response_time_check_path}"
         end
       end
     end

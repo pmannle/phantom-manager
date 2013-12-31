@@ -36,3 +36,5 @@ development:
   response_time_threshold: 2
   response_time_check_retries: 2
   response_time_check_interval: 40
+  response_time_check_host: 'localhost'
+  response_time_check_path: '/'
